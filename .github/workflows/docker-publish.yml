@@ -48,9 +48,15 @@ jobs:
           platforms: linux/arm/v7
           push: true
           tags: jopsis/aceserve:${{ steps.meta.outputs.version }}-arm32
-          cache-from: type=registry,ref=jopsis/aceserve:buildcache-arm32
-          cache-to: type=registry,ref=jopsis/aceserve:buildcache-arm32,mode=max
 
+      - name: Build and push ARM32 image (acestream)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./aceserve-arm32
+          platforms: linux/arm/v7
+          push: true
+          tags: jopsis/acestream:${{ steps.meta.outputs.version }}-arm32
+      
       - name: Build and push ARM64 image
         uses: docker/build-push-action@v5
         with:
@@ -58,9 +64,15 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: jopsis/aceserve:${{ steps.meta.outputs.version }}-arm64
-          cache-from: type=registry,ref=jopsis/aceserve:buildcache-arm64
-          cache-to: type=registry,ref=jopsis/aceserve:buildcache-arm64,mode=max
 
+      - name: Build and push ARM64 image (acestream)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./aceserve-arm64
+          platforms: linux/arm64
+          push: true
+          tags: jopsis/acestream:${{ steps.meta.outputs.version }}-arm64
+      
       - name: Build and push x86_64 image
         uses: docker/build-push-action@v5
         with:
@@ -68,9 +80,15 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: jopsis/aceserve:${{ steps.meta.outputs.version }}-amd64
-          cache-from: type=registry,ref=jopsis/aceserve:buildcache-amd64
-          cache-to: type=registry,ref=jopsis/aceserve:buildcache-amd64,mode=max
 
+      - name: Build and push x86_64 image (acestream)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./aceserve-x86_64
+          platforms: linux/amd64
+          push: true
+          tags: jopsis/acestream:${{ steps.meta.outputs.version }}-amd64
+      
       - name: Create and push multi-arch manifest for version tag
         run: |
           VERSION="${{ steps.meta.outputs.version }}"
@@ -78,6 +96,14 @@ jobs:
             jopsis/aceserve:${VERSION}-arm32 \
             jopsis/aceserve:${VERSION}-arm64 \
             jopsis/aceserve:${VERSION}-amd64
+
+      - name: Create and push multi-arch manifest for version tag (acestream)
+        run: |
+          VERSION="${{ steps.meta.outputs.version }}"
+          docker buildx imagetools create -t jopsis/acestream:${VERSION} \
+            jopsis/acestream:${VERSION}-arm32 \
+            jopsis/acestream:${VERSION}-arm64 \
+            jopsis/acestream:${VERSION}-amd64
 
       - name: Create and push multi-arch manifest for latest tag
         if: steps.meta.outputs.is_tag == 'true'
@@ -87,3 +113,12 @@ jobs:
             jopsis/aceserve:${VERSION}-arm32 \
             jopsis/aceserve:${VERSION}-arm64 \
             jopsis/aceserve:${VERSION}-amd64
+
+      - name: Create and push multi-arch manifest for latest tag (acestream)
+        if: steps.meta.outputs.is_tag == 'true'
+        run: |
+          VERSION="${{ steps.meta.outputs.version }}"
+          docker buildx imagetools create -t jopsis/acestream:latest \
+            jopsis/acestream:${VERSION}-arm32 \
+            jopsis/acestream:${VERSION}-arm64 \
+            jopsis/acestream:${VERSION}-amd64
