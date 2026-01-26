@@ -125,6 +125,10 @@ The project includes Dockerfiles for each architecture in their respective folde
 - `aceserve-arm64/`: For ARM64 devices
 - `aceserve-x86_64/`: For x86_64 systems
 
+## Known Issues
+
+- `ARM v8 architecture (like Raspberry Pi 5)`:  [`Not suitable for 'modern' 16k page-size kernels OS`](https://github.com/jopsis/docker-acestream-aceserve/issues/1)
+
 ## License
 
 This project is provided as-is, without warranties.
