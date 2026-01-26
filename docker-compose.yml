@@ -9,6 +9,10 @@ services:
       - "62062:62062"
     networks:
       - aceserve-network
+    dns:
+      # - 74.115.172.133
+      - 1.1.1.1
+      - 1.0.0.1
 networks:
   aceserve-network:
     driver: bridge

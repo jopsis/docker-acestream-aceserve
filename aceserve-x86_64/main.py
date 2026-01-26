@@ -110,29 +110,48 @@ if not OUTPUT_CONSOLE:
 # -----------------------------
 def log(msg):
     try:
+        line = '{}|{}|bootstrap|{}'.format(
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            threading.currentThread().name,
+            msg
+        )
         with open(os.path.join(home_dir, 'acestream.log'), 'a') as f:
-            f.write('{}|{}|bootstrap|{}\n'.format(
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                threading.currentThread().name,
-                msg
-            ))
+            f.write(line + '\n')
+        print(line)
     except:
         pass
 
-log('Starting AceStream (simulated ARMv8/ARMv7)')
+log('Starting AceStream Service on architecture: {}'.format(droid.getArch()))
 
 # -----------------------------
-# DNS override
+# DNS override siempre activo.
+# Si existe una línea "# ExtServers: [x.x.x.x ...]" en /etc/resolv.conf, la usa.
+# Si no, hace fallback a los nameserver normales.
+# Logea método usado.
 # -----------------------------
 import dns.resolver
 from dnsproxyd import dns_daemon
 
 nameservers = []
+found_extservers = False
 with open('/etc/resolv.conf', 'r') as f:
     for line in f:
-        match = re.match(r'nameserver\s+(\S+)', line)
-        if match:
-            nameservers.append(match.group(1))
+        ext_match = re.search(r'# ExtServers: \[(.*?)\]', line)
+        if ext_match:
+            ns_list = ext_match.group(1).split()
+            nameservers.extend(ns_list)
+            found_extservers = True
+if not nameservers:
+    with open('/etc/resolv.conf', 'r') as f:
+        for line in f:
+            match = re.match(r'nameserver\s+(\S+)', line)
+            if match:
+                nameservers.append(match.group(1))
+
+if found_extservers:
+    log(f'Override DNS usando ExtServers del comentario: {nameservers}')
+else:
+    log(f'Override DNS usando los nameserver estándar: {nameservers}')
 
 RESOLVER = dns.resolver.Resolver()
 RESOLVER.nameservers = nameservers
