@@ -117,7 +117,7 @@ class Android(object):
     elif method == "adjustCacheSettings":
       return None
     elif method == "getAppInfo":
-      return {
+      return json.dumps({
         "appId": "d3efefe5-4ce4-345b-adb6-adfa3ba92eab",
         "appVersionCode": "302131302",
         "deviceId": "d3efefe5-4ce4-345b-adb6-adfa3ba92eab",
@@ -126,7 +126,9 @@ class Android(object):
         "isAndroidTv": False,
         "hasBrowser": False,
         "hasWebView": False
-      }
+      })
+    elif method == "onAuthUpdated":
+      return None
     else:
       raise Exception("Unknown method: %s" % (method,))
 
