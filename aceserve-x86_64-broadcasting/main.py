@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import threading
 import traceback
 import re
@@ -85,7 +86,7 @@ class Android:
         return
 
     def getAppInfo(self, *args, **kwargs):
-        return {
+        return json.dumps({
             "appId": "d3efefe5-4ce4-345b-adb6-adfa3ba92eab",
             "appVersionCode": "6.6",
             "deviceId": "d3efefe5-4ce4-345b-adb6-adfa3ba92eab",
@@ -94,7 +95,10 @@ class Android:
             "isAndroidTv": False,
             "hasBrowser": False,
             "hasWebView": False
-        }
+        })
+
+    def onAuthUpdated(self, *args, **kwargs):
+        return
 
     def _fake_rpc(self, method, *args):
         print(method, *args)
