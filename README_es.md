@@ -1,5 +1,11 @@
 # Docker AceServe
 
+[![GitHub release](https://img.shields.io/github/v/release/jopsis/docker-acestream-aceserve?logo=github&label=release)](https://github.com/jopsis/docker-acestream-aceserve/releases/latest)
+[![Docker Pulls aceserve](https://img.shields.io/docker/pulls/jopsis/aceserve?label=aceserve%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/jopsis/aceserve)
+[![Docker Pulls acestream](https://img.shields.io/docker/pulls/jopsis/acestream?label=acestream%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/jopsis/acestream)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/jopsis)
+
 Contenedor Docker para AceStream Engine compatible con múltiples arquitecturas (ARM32, ARM64, x86_64).
 
 ## Descripción
