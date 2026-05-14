@@ -4,8 +4,8 @@
 [![Docker Pulls aceserve](https://img.shields.io/docker/pulls/jopsis/aceserve?label=aceserve%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/jopsis/aceserve)
 [![Docker Pulls acestream](https://img.shields.io/docker/pulls/jopsis/acestream?label=acestream%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/jopsis/acestream)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/jopsis)
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/yourace)
+**jopsis** [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/jopsis)
+**AceServe creator** [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/yourace)
 
 Docker container for AceStream Engine with support for multiple architectures (ARM32, ARM64, x86_64).
 
@@ -139,4 +139,3 @@ The project includes Dockerfiles for each architecture in their respective folde
 ## License
 
 This project is provided as-is, without warranties.
-
