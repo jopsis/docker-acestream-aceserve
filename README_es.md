@@ -139,4 +139,3 @@ El proyecto incluye Dockerfiles para cada arquitectura en sus respectivas carpet
 
 Este proyecto se proporciona tal cual, sin garantías.
 
-
